@@ -65,7 +65,7 @@ class guardian(Cog):
         """
         regex_kick_list = self.config.guild(ctx.guild).regex_kick_list()
         command = "Regex Kick"
-        await add_to_config(self, ctx, string_to_add, regex_kick_list, command)
+        await self.add_to_config(ctx, string_to_add, regex_kick_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -75,7 +75,7 @@ class guardian(Cog):
         """
         string_kick_list = self.config.guild(ctx.guild).string_kick_list()
         command = "String Kick"
-        await add_to_config(self, ctx, string_to_add, string_kick_list, command)
+        await self.add_to_config(ctx, string_to_add, string_kick_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -85,7 +85,7 @@ class guardian(Cog):
         """
         regex_ban_list = self.config.guild(ctx.guild).regex_ban_list()
         command = "Regex Ban"
-        await add_to_config(self, ctx, string_to_add, regex_ban_list, command)
+        await self.add_to_config(ctx, string_to_add, regex_ban_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -95,7 +95,7 @@ class guardian(Cog):
         """
         string_ban_list = self.config.guild(ctx.guild).string_ban_list()
         command = "String Ban"
-        await add_to_config(self, ctx, string_to_add, string_ban_list, command)
+        await self.add_to_config(ctx, string_to_add, string_ban_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -117,7 +117,7 @@ class guardian(Cog):
         await ctx.send(embed)
 
     @commands.Cog.listener()
-    async def on_member_join(member):
+    async def on_member_join(self, member):
         member_name = member.name()
         guild_group = self.config.guild(member.guild)
         string_bans = await guild_group.string_ban_list()
