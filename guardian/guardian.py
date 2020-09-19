@@ -23,7 +23,7 @@ class guardian(Cog):
         }
         self.config.register_guild(**default_guild)
 
-        async def add_to_config(self, ctx, string_to_add, command_list, command):
+        async def add_to_config(self, ctx, string_to_add: str, command_list, command: str):
             """
             :param self:
             :param ctx: command context
@@ -31,13 +31,28 @@ class guardian(Cog):
             :param command_list: list that the string will be added to
             :param command: command that that executed this function
             """
-            embed = discord.Embed(title="Guardian", color=0xff0080)
-            embed.set_thumbnail(url=ctx.guild.icon_url)
-            embed.add_field(name=f"Added new {command} filter", value=string_to_add)
+            addembed = discord.Embed(title="Guardian", color=0xff0080)
+            addembed.set_thumbnail(url=ctx.guild.icon_url)
+            addembed.add_field(name=f"Added new {command} filter", value=string_to_add)
+
+            removeembed = discord.Embed(title="Guardian", color=0xff0080)
+            removeembed.set_thumbnail(url=ctx.guild.icon_url)
+            removeembed.add_field(name=f"Removed {command} filter", value=string_to_add)
+
             try:
-                async with command_list as command_list:
-                    command_list.append(string_to_add)
-                await ctx.send(embed)
+
+                commandlist = await command_list
+
+                if string_to_add in commandlist:
+                    async with command_list as command_list:
+                        command_list.remove(string_to_add)
+                    await ctx.send()
+
+                else:
+                    async with command_list as command_list:
+                        command_list.append(string_to_add)
+                    await ctx.send(addembed)
+
             except Exception as exception:
                 error_string = f"There was an exception executing the {command}, error returned: {exception}"
                 print(error_string)
@@ -45,9 +60,9 @@ class guardian(Cog):
 
         @commands.command()
         @checks.admin_or_permissions(ban_members=True)
-        async def addregexkick(self, ctx, string_to_add: str):
+        async def regexkick(self, ctx, string_to_add: str):
             """
-            Adds a regex kick filter
+            Adds/removes a regex kick filter
             """
             regex_kick_list = self.config.guild(ctx.guild).regex_kick_list()
             command = "Regex Kick"
@@ -55,9 +70,9 @@ class guardian(Cog):
 
         @commands.command()
         @checks.admin_or_permissions(ban_members=True)
-        async def addstringkick(self, ctx, string_to_add: str):
+        async def stringkick(self, ctx, string_to_add: str):
             """
-            Adds a string match kick filter
+            Adds/removes a string match kick filter
             """
             string_kick_list = self.config.guild(ctx.guild).string_kick_list()
             command = "String Kick"
@@ -65,9 +80,9 @@ class guardian(Cog):
 
         @commands.command()
         @checks.admin_or_permissions(ban_members=True)
-        async def addregexban(self, ctx, string_to_add: str):
+        async def regexban(self, ctx, string_to_add: str):
             """
-            Adds a regex ban filter
+            Adds/removes a regex ban filter
             """
             regex_ban_list = self.config.guild(ctx.guild).regex_ban_list()
             command = "Regex Ban"
@@ -75,9 +90,9 @@ class guardian(Cog):
 
         @commands.command()
         @checks.admin_or_permissions(ban_members=True)
-        async def addstringban(self, ctx, string_to_add: str):
+        async def stringban(self, ctx, string_to_add: str):
             """
-            Adds a string match ban filter
+            Adds/removes a string match ban filter
             """
             string_ban_list = self.config.guild(ctx.guild).string_ban_list()
             command = "String Ban"
@@ -95,6 +110,7 @@ class guardian(Cog):
             regex_bans = "\n".join(await guild_group.regex_ban_list())
             regex_kicks = "\n".join(await guild_group.regex_kick_list())
             embed = discord.Embed(title="Guardian Filter List", color=0xff0080)
+            embed.set_thumbnail(url=ctx.guild.icon_url)
             embed = embed.add_field(name="String Ban List:", value=f"```{string_bans}```")
             embed = embed.add_field(name="Regex Ban List:", value=f"```{regex_bans}```")
             embed = embed.add_field(name="String Kick List:", value=f"```{string_kicks}```")
