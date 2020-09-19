@@ -40,7 +40,7 @@ class guardian(Cog):
 
         try:
 
-            commandlist = await command_list
+            commandlist = await command_list()
 
             if string_to_add in commandlist:
                 async with command_list as command_list:
