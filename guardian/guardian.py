@@ -45,12 +45,12 @@ class guardian(Cog):
             if string_to_add in commandlist:
                 async with command_list as command_list:
                     command_list.remove(string_to_add)
-                await ctx.send(removeembed)
+                await ctx.send(embed=removeembed)
 
             else:
                 async with command_list as command_list:
                     command_list.append(string_to_add)
-                await ctx.send(addembed)
+                await ctx.send(embed=addembed)
 
         except Exception as exception:
             error_string = f"There was an exception executing the {command}, error returned: {exception}"
@@ -114,7 +114,7 @@ class guardian(Cog):
         embed = embed.add_field(name="Regex Ban List:", value=f"```{regex_bans}```")
         embed = embed.add_field(name="String Kick List:", value=f"```{string_kicks}```")
         embed = embed.add_field(name="Regex Kick List:", value=f"```{regex_kicks}```")
-        await ctx.send(embed)
+        await ctx.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
