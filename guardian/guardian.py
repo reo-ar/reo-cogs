@@ -46,7 +46,7 @@ class guardian(Cog):
                 if string_to_add in commandlist:
                     async with command_list as command_list:
                         command_list.remove(string_to_add)
-                    await ctx.send()
+                    await ctx.send(removeembed)
 
                 else:
                     async with command_list as command_list:
