@@ -19,10 +19,10 @@ async def add_to_config(ctx, string_to_add: str, command_list, command: str):
             async with command_list() as command_list:
                 command_list.remove(string_to_add)
 
-            removeembed = discord.Embed(title="Guardian", color=0xff0080)
-            removeembed.set_thumbnail(url=ctx.guild.icon_url)
-            removeembed.add_field(name=f"Removed {command} filter", value=string_to_add)
-            await ctx.send(embed=removeembed)
+            remove_embed = discord.Embed(title="Guardian", color=0xff0080)
+            remove_embed.set_thumbnail(url=ctx.guild.icon_url)
+            remove_embed.add_field(name=f"Removed {command} filter", value=string_to_add)
+            await ctx.send(embed=remove_embed)
 
         else:
             async with command_list() as command_list:
