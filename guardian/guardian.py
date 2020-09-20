@@ -95,16 +95,20 @@ class guardian(Cog):
             if ban in member_name:
                 await member.ban(reason=f"Guardian has detected this user's "
                                         f"name contains the following string ban: {ban}")
+                return
 
         for ban in regex_bans:
             if re.search(ban, member_name):
                 await member.ban(reason=f"Guardian has detected this user matched the following regex ban: {ban}")
+                return
 
         for kick in string_kicks:
             if kick in member_name:
                 await member.kick(reason=f"Guardian has detected this user's"
                                          f"name contains the following string kick {kick}")
+                return
 
         for kick in regex_kicks:
             if re.search(kick, member_name):
                 await member.kick(reason=f"Guardian has detected this user matched the following regex kick: {kick}")
+                return
