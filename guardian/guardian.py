@@ -10,6 +10,7 @@ class guardian(Cog):
     """
     This cog kicks usernames using either regex or string matching.
     """
+
     def __init__(self, bot):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=10010)
@@ -132,19 +133,18 @@ class guardian(Cog):
 
         for ban in string_bans:
             if ban in member_name:
-                await ban(member, reason=f"Guardian has detected this user's "
-                                         f"name contains the following string ban: {ban}")
+                await member.ban(reason=f"Guardian has detected this user's "
+                                        f"name contains the following string ban: {ban}")
 
         for ban in regex_bans:
             if re.search(ban, member_name):
-                await ban(member, reason=f"Guardian has detected this user matched the following regex ban: {ban}")
+                await member.ban(reason=f"Guardian has detected this user matched the following regex ban: {ban}")
 
         for kick in string_kicks:
             if kick in member_name:
-                await kick(member, reason=f"Guardian has detected this user's"
-                                          f"name contains the following string kick {kick}")
+                await member.kick(reason=f"Guardian has detected this user's"
+                                         f"name contains the following string kick {kick}")
 
         for kick in regex_kicks:
             if re.search(kick, member_name):
-                await kick(member,
-                           reason=f"Guardian has detected this user matched the following regex kick: {kick}")
+                await member.kick(reason=f"Guardian has detected this user matched the following regex kick: {kick}")
