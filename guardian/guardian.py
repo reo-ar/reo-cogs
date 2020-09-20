@@ -30,7 +30,8 @@ class guardian(Cog):
 
         try:
 
-            commandlist = await command_list
+            cl = await command_list
+            commandlist = cl
 
             if string_to_add in commandlist:
                 print(f"trying to remove {string_to_add}")
