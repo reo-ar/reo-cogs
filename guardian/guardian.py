@@ -30,7 +30,7 @@ class guardian(Cog):
 
         try:
 
-            cl = await command_list
+            cl = await command_list()
             commandlist = cl
 
             if string_to_add in commandlist:
@@ -68,7 +68,7 @@ class guardian(Cog):
         """
         Adds/removes a regex kick filter
         """
-        regex_kick_list = self.config.guild(ctx.guild).regex_kick_list()
+        regex_kick_list = self.config.guild(ctx.guild).regex_kick_list
         command = "Regex Kick"
         await self.add_to_config(ctx, string_to_add, regex_kick_list, command)
 
@@ -78,7 +78,7 @@ class guardian(Cog):
         """
         Adds/removes a string match kick filter
         """
-        string_kick_list = self.config.guild(ctx.guild).string_kick_list()
+        string_kick_list = self.config.guild(ctx.guild).string_kick_list
         command = "String Kick"
         await self.add_to_config(ctx, string_to_add, string_kick_list, command)
 
@@ -88,7 +88,7 @@ class guardian(Cog):
         """
         Adds/removes a regex ban filter
         """
-        regex_ban_list = self.config.guild(ctx.guild).regex_ban_list()
+        regex_ban_list = self.config.guild(ctx.guild).regex_ban_list
         command = "Regex Ban"
         await self.add_to_config(ctx, string_to_add, regex_ban_list, command)
 
@@ -98,7 +98,7 @@ class guardian(Cog):
         """
         Adds/removes a string match ban filter
         """
-        string_ban_list = self.config.guild(ctx.guild).string_ban_list()
+        string_ban_list = self.config.guild(ctx.guild).string_ban_list
         command = "String Ban"
         await self.add_to_config(ctx, string_to_add, string_ban_list, command)
 
