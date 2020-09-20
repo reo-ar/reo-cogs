@@ -1,3 +1,6 @@
+import discord
+
+
 async def add_to_config(ctx, string_to_add: str, command_list, command: str):
     """
     :param self:
