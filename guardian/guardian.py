@@ -1,4 +1,5 @@
 from redbot.core import Config, commands, checks
+from .utils.configutils import add_to_config
 import discord
 import re
 from typing import Any
@@ -20,49 +21,6 @@ class guardian(Cog):
         }
         self.config.register_guild(**default_guild)
 
-    async def add_to_config(self, ctx, string_to_add: str, command_list, command: str):
-        """
-        :param self:
-        :param ctx: command context
-        :param string_to_add: string to be added to the command's list
-        :param command_list: list that the string will be added to
-        :param command: command that that executed this function
-        """
-
-        try:
-
-            cl = await command_list()
-            commandlist = cl
-
-            if string_to_add in commandlist:
-                print(f"trying to remove {string_to_add}")
-
-                async with command_list() as command_list:
-                    print(f"Filter removed {string_to_add}")
-                    command_list.remove(string_to_add)
-
-                removeembed = discord.Embed(title="Guardian", color=0xff0080)
-                removeembed.set_thumbnail(url=ctx.guild.icon_url)
-                removeembed.add_field(name=f"Removed {command} filter", value=string_to_add)
-                await ctx.send(embed=removeembed)
-
-            else:
-                print(f"trying to add {string_to_add}")
-
-                async with command_list() as command_list:
-                    print(f"New filter added {string_to_add}")
-                    command_list.append(string_to_add)
-
-                addembed = discord.Embed(title="Guardian", color=0xff0080)
-                addembed.set_thumbnail(url=ctx.guild.icon_url)
-                addembed.add_field(name=f"Added new {command} filter", value=string_to_add)
-                await ctx.send(embed=addembed)
-
-        except Exception as exception:
-            error_string = f"There was an exception executing the {command}, error returned: {exception}"
-            print(error_string)
-            await ctx.send(error_string)
-
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
     async def regexkick(self, ctx, string_to_add: str):
@@ -71,7 +29,7 @@ class guardian(Cog):
         """
         regex_kick_list = self.config.guild(ctx.guild).regex_kick_list
         command = "Regex Kick"
-        await self.add_to_config(ctx, string_to_add, regex_kick_list, command)
+        await add_to_config(ctx, string_to_add, regex_kick_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -81,7 +39,7 @@ class guardian(Cog):
         """
         string_kick_list = self.config.guild(ctx.guild).string_kick_list
         command = "String Kick"
-        await self.add_to_config(ctx, string_to_add, string_kick_list, command)
+        await add_to_config(ctx, string_to_add, string_kick_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -91,7 +49,7 @@ class guardian(Cog):
         """
         regex_ban_list = self.config.guild(ctx.guild).regex_ban_list
         command = "Regex Ban"
-        await self.add_to_config(ctx, string_to_add, regex_ban_list, command)
+        await add_to_config(ctx, string_to_add, regex_ban_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -101,7 +59,7 @@ class guardian(Cog):
         """
         string_ban_list = self.config.guild(ctx.guild).string_ban_list
         command = "String Ban"
-        await self.add_to_config(ctx, string_to_add, string_ban_list, command)
+        await add_to_config(ctx, string_to_add, string_ban_list, command)
 
     @commands.command()
     @checks.admin_or_permissions(ban_members=True)
@@ -130,6 +88,8 @@ class guardian(Cog):
         string_kicks = await guild_group.string_kick_list()
         regex_bans = await guild_group.regex_ban_list()
         regex_kicks = await guild_group.regex_kick_list()
+
+        # Do bans first then kicks in case of duplicates
 
         for ban in string_bans:
             if ban in member_name:
