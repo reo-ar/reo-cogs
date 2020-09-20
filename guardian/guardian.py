@@ -27,30 +27,33 @@ class guardian(Cog):
         :param command_list: list that the string will be added to
         :param command: command that that executed this function
         """
-        addembed = discord.Embed(title="Guardian", color=0xff0080)
-        addembed.set_thumbnail(url=ctx.guild.icon_url)
-        addembed.add_field(name=f"Added new {command} filter", value=string_to_add)
-
-        removeembed = discord.Embed(title="Guardian", color=0xff0080)
-        removeembed.set_thumbnail(url=ctx.guild.icon_url)
-        removeembed.add_field(name=f"Removed {command} filter", value=string_to_add)
 
         try:
 
-            commandlist = await command_list()
+            commandlist = await command_list
 
             if string_to_add in commandlist:
                 print(f"trying to remove {string_to_add}")
+
                 async with command_list() as command_list:
                     print(f"Filter removed {string_to_add}")
                     command_list.remove(string_to_add)
+
+                removeembed = discord.Embed(title="Guardian", color=0xff0080)
+                removeembed.set_thumbnail(url=ctx.guild.icon_url)
+                removeembed.add_field(name=f"Removed {command} filter", value=string_to_add)
                 await ctx.send(embed=removeembed)
 
             else:
                 print(f"trying to add {string_to_add}")
+
                 async with command_list() as command_list:
                     print(f"New filter added {string_to_add}")
                     command_list.append(string_to_add)
+
+                addembed = discord.Embed(title="Guardian", color=0xff0080)
+                addembed.set_thumbnail(url=ctx.guild.icon_url)
+                addembed.add_field(name=f"Added new {command} filter", value=string_to_add)
                 await ctx.send(embed=addembed)
 
         except Exception as exception:
