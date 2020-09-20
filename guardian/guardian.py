@@ -14,10 +14,7 @@ class guardian(Cog):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=10010)
         default_guild = {
-            "regex_kick_list": [],
-            "string_kick_list": [],
-            "regex_ban_list": [],
-            "string_ban_list": [],
+            "guardian_list": [],
             "guardian_log": 0
         }
         self.config.register_guild(**default_guild)
@@ -43,12 +40,16 @@ class guardian(Cog):
             commandlist = await command_list()
 
             if string_to_add in commandlist:
+                print(f"trying to remove {string_to_add}")
                 async with command_list() as command_list:
+                    print(f"Filter removed {string_to_add}")
                     command_list.remove(string_to_add)
                 await ctx.send(embed=removeembed)
 
             else:
+                print(f"trying to add {string_to_add}")
                 async with command_list() as command_list:
+                    print(f"New filter added {string_to_add}")
                     command_list.append(string_to_add)
                 await ctx.send(embed=addembed)
 
