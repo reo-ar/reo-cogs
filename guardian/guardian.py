@@ -123,7 +123,7 @@ class guardian(Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        member_name = member.name()
+        member_name = member.name
         guild_group = self.config.guild(member.guild)
         string_bans = await guild_group.string_ban_list()
         string_kicks = await guild_group.string_kick_list()
