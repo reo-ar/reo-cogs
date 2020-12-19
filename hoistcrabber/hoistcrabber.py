@@ -63,4 +63,4 @@ class HoistCrabber(Cog):
         member_nick = member.nick
         for hoist_char in hoist_list:
             if member_nick.startswith(hoist_char):
-                member.edit(nick=crab_char)
+                await member.edit(nick=crab_char)
