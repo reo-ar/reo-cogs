@@ -1,5 +1,5 @@
-from .guardian import guardian
+from .guardian import Guardian
 
 
 def setup(bot):
-    bot.add_cog(guardian(bot))
+    bot.add_cog(Guardian(bot))

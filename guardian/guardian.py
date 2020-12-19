@@ -7,7 +7,7 @@ from typing import Any
 Cog: Any = getattr(commands, "Cog", object)
 
 
-class guardian(Cog):
+class Guardian(Cog):
     """
     This cog kicks usernames using either regex or string matching.
     """
@@ -27,7 +27,7 @@ class guardian(Cog):
         """
         Adds/removes a regex kick filter
         """
-        regex_kick_list = self.config.guild(ctx.guild).regex_kick_list
+        regex_kick_list = self.config.guild(ctx.guild).regex_kawick_list
         command = "Regex Kick"
         await add_to_config(ctx, string_to_add, regex_kick_list, command)
 
