@@ -27,8 +27,8 @@ class BudgetNitro(Cog):
                     if emoji.name in msg:
                         OwO = emoji.name
                         uwu = emoji.id
-                        msg = re.sub(OwO, ("<a:%s:%d>" % (OwO, uwu)), message.content)
+                        msg = re.sub(OwO, ("<a:%s:%d>" % (OwO, uwu)), msg)
                         ouo = True
 
         if ouo is True:
-            await message.guild.send(msg)
+            await message.channel.send(msg)
