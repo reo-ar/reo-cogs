@@ -1,6 +1,5 @@
 from redbot.core import Config, commands, checks
 import discord
-import re
 from typing import Any
 
 Cog: Any = getattr(commands, "Cog", object)
@@ -27,9 +26,11 @@ class HoistCrabber(Cog):
         Adds/removes a character/characters to be renamed if used
         """
         hoist_list = self.config.guild(ctx.guild).hoist_list
+
+        hoistlist = await hoist_list
         embed = discord.Embed(title="Hoist Crabber", color=0xff0080)
 
-        if hoist_char in hoist_list:
+        if hoist_char in hoistlist:
             async with hoist_list() as hoist_list:
                 hoist_list.remove(hoist_char)
             embed.set_thumbnail(url=ctx.guild.icon_url)
