@@ -27,7 +27,7 @@ class HoistCrabber(Cog):
         """
         hoist_list = self.config.guild(ctx.guild).hoist_list
 
-        hoistlist = await hoist_list
+        hoistlist = await hoist_list()
         embed = discord.Embed(title="Hoist Crabber", color=0xff0080)
 
         if hoist_char in hoistlist:
