@@ -62,5 +62,8 @@ class HoistCrabber(Cog):
         crab_char = await self.config.guild(member.guild).crab_char()
         member_nick = member.nick
         for hoist_char in hoist_list:
-            if member_nick.startswith(hoist_char):
-                await member.edit(nick=crab_char)
+            try:
+                if member_nick.startswith(hoist_char):
+                    await member.edit(nick=crab_char)
+            except AttributeError:
+                pass

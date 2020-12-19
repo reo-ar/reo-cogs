@@ -19,6 +19,7 @@ class BudgetNitro(Cog):
     async def on_message(self, message: discord.Message):
         owo = message.guild.emojis
         msg = message.content
+        ouo = False
 
         if message.author.bot is False and "<a:" not in message.content:
             for emoji in owo:
@@ -27,9 +28,7 @@ class BudgetNitro(Cog):
                         OwO = emoji.name
                         uwu = emoji.id
                         msg = re.sub(OwO, ("<a:%s:%d>" % (OwO, uwu)), message.content)
+                        ouo = True
 
-        if msg == message.content:
-            pass
-        
-        else:
+        if ouo is True:
             await message.guild.send(msg)
