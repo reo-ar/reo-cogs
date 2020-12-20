@@ -19,4 +19,4 @@ class BanMe(Cog):
         """
         Does what it says on the tin, bans yourself.
         """
-        await ctx.guild.ban(ctx.member, reason="You literally banned yourself")
+        await ctx.guild.ban(ctx.author, reason="You literally banned yourself")
