@@ -20,9 +20,9 @@ class BanMe(Cog):
         """
         Does what it says on the tin, bans yourself.
         """
-        await ctx.send("Are you sure about banning yourself? Answer with a `Yes` or a `No`")
         pred = MessagePredicate.yes_or_no(ctx)
         await self.bot.wait_for("message", check=pred)
+        await ctx.send("Are you sure about banning yourself? Answer with a `Yes` or a `No`")
         if pred.result is True:
             try:
                 await ctx.guild.ban(ctx.author, reason="You literally banned yourself")
