@@ -20,11 +20,11 @@ class BanMe(Cog):
         """
         Does what it says on the tin, bans yourself.
         """
-        try:
-            pred = MessagePredicate.yes_or_no()
-            await self.bot.wait_for("message", check=MessagePredicate.same_context(ctx))
-            await ctx.send("Are you sure about banning yourself? Answer with a `Yes` or a `No`")
-            if pred.result is True:
+        pred = MessagePredicate.yes_or_no()
+        await self.bot.wait_for("message", check=MessagePredicate.same_context(ctx))
+        await ctx.send("Are you sure about banning yourself? Answer with a `Yes` or a `No`")
+        if pred.result is True:
+            try:
                 await ctx.guild.ban(ctx.author, reason="You literally banned yourself")
-        except Exception as e:
-            await ctx.send("Yeah I don't have perms to do that.")
+            except Exception as e:
+                await ctx.send(f"Error: ***{e}***")
