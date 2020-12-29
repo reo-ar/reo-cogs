@@ -72,8 +72,8 @@ class Disco(Cog):
                         r = random.randint(0, 255)
                         g = random.randint(0, 255)
                         b = random.randint(0, 255)
-                        owo = message.guild.get_role(await ara.role())
-                        await owo.edit(colour=discord.Colour.from_rgb(r, g, b))
+                        role = message.guild.get_role(await ara.role())
+                        await role.edit(color=discord.Color.from_rgb(r, g, b))
         except Exception as e:
             print(e)
             pass
