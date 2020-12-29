@@ -1,5 +1,5 @@
-from .disco import Disco
+from .disco import DiscoMode
 
 
 def setup(bot):
-    bot.add_cog(Disco(bot))
+    bot.add_cog(DiscoMode(bot))

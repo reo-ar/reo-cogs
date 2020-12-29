@@ -6,14 +6,14 @@ from redbot.core import Config, checks, commands
 Cog: Any = getattr(commands, "Cog", object)
 
 
-class Disco(Cog):
+class DiscoMode(Cog):
     """
     This cog will randomize the color of your Roles!
     """
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=801)
+        self.config = Config.get_conf(self, identifier=894)
         default_guild = {"role": 0, "act": False, "ich": 0, "count": 5}
         self.config.register_guild(**default_guild)
 
