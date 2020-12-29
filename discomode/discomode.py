@@ -1,16 +1,20 @@
 import random
+from typing import Any
+
 import discord
 from redbot.core import Config, checks, commands
 
+Cog: Any = getattr(commands, "Cog", object)
 
-class DiscoMode(commands.Cog):
+
+class DiscoMode(Cog):
     """
     This cog will randomize the color of your Roles!
     """
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=894)
+        self.config = Config.get_conf(self, identifier=801)
         default_guild = {"role": 0, "act": False, "ich": 0, "count": 5}
         self.config.register_guild(**default_guild)
 
@@ -69,8 +73,8 @@ class DiscoMode(commands.Cog):
                         r = random.randint(0, 255)
                         g = random.randint(0, 255)
                         b = random.randint(0, 255)
-                        role = message.guild.get_role(await ara.role())
-                        await role.edit(color=discord.Color.from_rgb(r, g, b))
+                        owo = message.guild.get_role(await ara.role())
+                        await owo.edit(colour=discord.Colour.from_rgb(r, g, b))
         except Exception as e:
             print(e)
             pass

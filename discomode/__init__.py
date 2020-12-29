@@ -1,4 +1,4 @@
-from .disco import DiscoMode
+from .discomode import DiscoMode
 
 
 def setup(bot):
