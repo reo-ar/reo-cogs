@@ -17,7 +17,10 @@ class BudgetNitro(Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        owo = message.guild.emojis
+        try:
+            owo = message.guild.emojis
+        except AttributeError:
+            return
         msg = message.content
         ouo = False
 
