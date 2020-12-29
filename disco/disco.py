@@ -1,12 +1,9 @@
 import random
-from typing import Any
 import discord
 from redbot.core import Config, checks, commands
 
-Cog: Any = getattr(commands, "Cog", object)
 
-
-class DiscoMode(Cog):
+class DiscoMode(commands.Cog):
     """
     This cog will randomize the color of your Roles!
     """
