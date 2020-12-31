@@ -75,10 +75,7 @@ class DiscoMode(Cog):
                         b = random.randint(0, 255)
                         owo = message.guild.get_role(await ara.role())
                         await owo.edit(colour=discord.Colour.from_rgb(r, g, b))
-        except (AttributeError, discord.errors.Forbidden) as e:
-            if e is AttributeError:
-                pass
-            else:
-                await message.channel.send(f"ERROR: {e}")
+        except Exception as e:
+            pass
 
 
